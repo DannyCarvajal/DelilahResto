@@ -1,44 +1,90 @@
 
 /* MODEL */
-const plateModel = require('../model/Plate')
+import {plateModel} from '../model/Plate.js'
 
-module.exports={  
-    getPlates: async function (req,res){
+export const getPlates = async (req, res) =>{
 
-    const plates = await plateModel.findAll() 
+    try {
+        const plates = await plateModel.findAll()
 
-    try{
-        if(!plates)
+        if (!plates)
             return res.status(404).send('No plate found to order')
 
-        res.status(201).send({data: plates})
+        res.status(201).send({ data: plates })
     }
-    catch(err){
+    catch (err) {
         res.status(400).send('Something went wrong')
     }
 
-    },
+}
 
-    getPlateById: async function(req,res){
+export const getPlateById = async (req, res) => {
 
-    
-    },
+    const id = req.params.id
 
+    try {
+        const plates = await plateModel.findOne({
+            where:{
+                Plate_Id: id
+            }
+        })
 
+        if (!plates)
+            return res.status(404).send(`No plate found with the id ${id}`)
 
-    createPlate: async function(req,res){
+        res.status(201).send({ data: plates })
+    }
+    catch (err) {
+        res.status(400).send('Something went wrong')
+    }
 
-    
-    },
+}
 
-    updatePlate: async function(req,res){
+export const createPlate = async (req, res)  =>{
 
-    
-    },
+    const {Name,Price,Description,Img} = req.body
 
+    try{
+        const plates = await plateModel.create({Name,Price,Description,Img})
+        res.status(201).send(`Plate ${plates.Name} correctly created`) 
+    }
+    catch(err){
+        res.status(400).send('Something went wrong' , err)
+    }
+}
 
-    deletePlateById: async function(req,res){
+export const updatePlate = async (req, res) => {
 
+    const {Plate_Id,Name,Price,Description,Img} = req.body
 
+    try{
+        const plates = await plateModel.update({
+            Plate_Id,Name,Price,Description,Img},{
+            where:{
+                Plate_Id
+            }
+        })
+
+        res.status(201).send(`Plate ${Plate_Id} correctly updated`) 
+    }
+    catch(err){
+        res.status(400).send('Something went wrong' , err)
+    }
+}
+
+export const deletePlateById = async (req, res) => {
+
+    const id = req.params.id
+
+    try{
+        const plates = await plateModel.destroy({
+            where:{
+                Plate_Id: id
+            }
+        })
+        res.status(201).send(`Plate ${id} correctly deleted`) 
+    }
+    catch(err){
+        res.status(400).send('Something went wrong' , err)
     }
 }

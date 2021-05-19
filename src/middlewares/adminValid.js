@@ -1,7 +1,5 @@
 
-const userModel= require('../model/User')
-
-module.exports= function adminrole(req,res,next){
+export const adminrole = (req,res,next) => {
 
     const {Role_Id} = req.body
 

@@ -1,14 +1,14 @@
-const { check, validationResult } = require("express-validator");
+import { check, validationResult } from "express-validator";
 
-module.exports = [
+export const userDataValidation = [
 
-    check('Nickname', 'Name must be +4 chars' )
-    .isLength({min:4,max:12})
+    check('Nickname', 'Name must be +4 chars and -15 chars' )
+    .isLength({min:4,max:15})
     .not()
     .isEmpty(),
 
-    check('Name', 'Nickname must be +4 chars')
-    .isLength({min:4,max:12})
+    check('Name', 'Nickname must be +4 chars and -15 chars')
+    .isLength({min:4,max:15})
     .not()
     .isEmpty(),
 

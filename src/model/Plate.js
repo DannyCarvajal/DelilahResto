@@ -1,31 +1,28 @@
 
+import connection from '../database.js'
 
-const db= require('../database')
+import Sequelize from "sequelize" // Import the built-in data types
+const {DataTypes} = Sequelize 
 
-const { DataTypes } = require("sequelize"); // Import the built-in data types
+export const plateModel= connection.define('foodplate',{
 
-const foodPlate= db.define('foodplate',{
-
-    Plate_Id: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    Name:{
+    name:{
         type:DataTypes.STRING
     },
-    Price:{
+    price:{
         type:DataTypes.INTEGER
     },
-    Description:{
+    description:{
         type: DataTypes.TEXT
     },
-    Img:{
+    img:{
         type:DataTypes.INTEGER,
     }
 },{
     timestamps: false
 })
-
-
-module.exports=foodPlate

@@ -1,36 +1,45 @@
 
-const db= require('../database')
+import connection from '../database.js'
 
-const { DataTypes } = require("sequelize"); // Import the built-in data types
+import Sequelize from "sequelize" // Import the built-in data types
+const {DataTypes} = Sequelize 
 
-const User= db.define('user',{
+export const userModel= connection.define('user',{
 
-    User_Id: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    Nickname:{
+    nickname:{
         type:DataTypes.STRING,
         unique:true
     },
-    Name:{
+    name:{
         type:DataTypes.STRING
     },
-    Email:{
+    email:{
         type:DataTypes.STRING,
         unique:true
     },
-    Password:{
+    phonenumber:{
+        type:DataTypes.STRING
+    },
+    adress:{
         type: DataTypes.STRING
     },
-    Roleid:{
+    password:{
+        type: DataTypes.STRING
+    },
+    roleId:{
         type:DataTypes.INTEGER,
-        default: 2
+        default: 2,
+        // references:{
+        //     model: 'roles',
+        //     key: 'id'
+        // }
     }
 },{
-    timestamps: false
+    timestamps: false,
 })
 
-
-module.exports=User

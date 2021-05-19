@@ -1,65 +1,20 @@
 
-const router = require('express').Router()
-
-/* CONNECTION DATABASE */
-const db= require('../database')
-
-/* DATABASE MODELS */
-const userModel = require('../model/User')
+import {Router} from 'express'
+const router = Router()
 
 /* VALIDATIONS */
-const userDataValidation= require('../middlewares/dataValid')
+import {userDataValidation} from '../middlewares/dataValid.js'
+import {userExistenceValidation} from '../middlewares/alreadyexist.js'
 
-/* JSON TOKENS */
-const jwt = require('jsonwebtoken')
-
-/*CONFIG */
-require('dotenv').config()
+/* CONTROLLER */
+import * as authController from '../controllers/Auth.controller.js'
 
 
 /* REGISTER */
-router.post('/register', userDataValidation ,async (req,res)=>{
-
-    const {Nickname,Name,Email,Password} = req.body
-
-    try{
-        const newuser= await userModel.create({Nickname,Name,Email,Password})
-        res.status(201).send(`User ${newuser.Nickname} correctly created`) 
-
-    }
-    catch(err){
-        res.status(400).send('User could not be created '+ err)
-    }
-
-})
+router.post('/register',userExistenceValidation, userDataValidation , authController.registerUser)
 
 /* LOGIN */
+router.post('/login', authController.userLogin)
 
-router.post('/login',async (req,res)=>{
 
-    const {Email,Password} = req.body
-    
-    try{
-        /* VERIFY THE EXISTENCE OF THE USER */
-        const verifyuser= await userModel.findOne({
-            where:{Email:Email,Password: Password }
-        })
-
-        if (!verifyuser)
-            return res.status(401).send('Email or password are incorrect')
-
-        /* CREATE WEB TOKEN  */
-        const token= jwt.sign({ Id: Password}, process.env.TOKEN_SECRET)
-
-        console.log(token)
-
-        res.header('Auth-token',token).send(`User correctly logged , token: ${token}`)
-        
-    }
-    catch{
-        console.error('algo anda mal')
-    }
-
-})
-
-module.exports = router
+export default router

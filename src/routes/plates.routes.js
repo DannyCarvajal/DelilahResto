@@ -1,81 +1,31 @@
 
-const router = require('express').Router()
-
-/* CONNECTION DATABASE */
-const db= require('../database')
-
-/* MODELS */
-const plateModel = require('../model/Plate')
+import {Router} from 'express'
+const router = Router()
 
 /* VALIDATION */
-const verifyToken = require('../middlewares/verifyToken')
+import {verifyToken} from '../middlewares/verifyToken.js'
 
 /* CONTROLLERS */
-const {getPlates} = require('../controllers/Plates.controller')
+import * as plateController from '../controllers/Plates.controller.js'
 
 
+router.use(verifyToken)
 /* PLATES */
 
 /* GET THE PLATES AVAILABLE */
-router.get('/', getPlates )
+router.get('/', plateController.getPlates )
 
+/* GET PLATE BY ID */
+router.get('/:id', plateController.getPlateById )
 
 /* POST A NEW PLATE */
-router.post('/', async (req,res)=>{
-
-    const {Name,Price,Description,Img} = req.body
-
-    try{
-        const plates = await plateModel.create({Name,Price,Description,Img})
-        res.status(201).send(`Plate ${plates.Name} correctly created`) 
-    }
-    catch(err){
-        res.status(400).send('Something went wrong' , err)
-    }
-
-})
-
+router.post('/',plateController.createPlate)
 
 /* UPDATE A PLATE */
-router.put('/', async (req,res)=>{
-
-    const {Plate_Id,Name,Price,Description,Img} = req.body
-
-    try{
-        const plates = await plateModel.update({
-            Plate_Id,Name,Price,Description,Img},{
-            where:{
-                Plate_Id
-            }
-        }
-        )
-        res.status(201).send(`Plate ${Plate_Id} correctly updated`) 
-    }
-    catch(err){
-        res.status(400).send('Something went wrong' , err)
-    }
-
-})
-
+router.put('/',plateController.updatePlate)
 
 /* DELETE A PLATE */
-router.delete('/:id', async (req,res)=>{
-
-    const id = req.params.id
-
-    try{
-        const plates = await plateModel.destroy({
-            where:{
-                Plate_Id: id
-            }
-        })
-        res.status(201).send(`Plate ${id} correctly deleted`) 
-    }
-    catch(err){
-        res.status(400).send('Something went wrong' , err)
-    }
-
-})
+router.delete('/:id', plateController.deletePlateById)
 
 
-module.exports= router
+export default router
