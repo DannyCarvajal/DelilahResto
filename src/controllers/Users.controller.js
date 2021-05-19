@@ -22,7 +22,7 @@ export const deleteUserById = async (req, res) => {
     try{
         const deleteUser = await userModel.destroy({
             where:{
-                User_Id: id
+                id: id
             }
         })
         res.status(201).send(`User ${id} correctly deleted`) 
