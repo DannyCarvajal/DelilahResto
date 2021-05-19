@@ -1,6 +1,6 @@
 
 /* DATABASE MODELS */
-import {userModel} from '../model/User.js'
+import {user} from '../model/index.js'
 
 /* JSON TOKENS */
 import jwt from 'jsonwebtoken'
@@ -14,7 +14,7 @@ export const registerUser = async (req,res)=>{
     const {nickname,name,email,phonenumber,adress,password} = req.body
 
     try{
-        const newuser= await userModel.create({nickname,name,email,phonenumber,adress,password})
+        const newuser= await user.create({nickname,name,email,phonenumber,adress,password})
         res.status(201).send(`User ${newuser.nickname} correctly created`) 
 
     }
@@ -29,7 +29,7 @@ export const userLogin = async (req,res)=>{
     
     try{
         /* VERIFY THE EXISTENCE OF THE USER */
-        const verifyuser= await userModel.findOne({
+        const verifyuser= await user.findOne({
             where:{email:email,password: password }
         })
 

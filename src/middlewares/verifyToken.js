@@ -1,6 +1,6 @@
 
 import jwt from 'jsonwebtoken'
-import {userModel} from '../model/User.js'
+import {user} from '../model/index.js'
 
 /* ENVIROMENT VARIABLES */
 import dotenv from 'dotenv'
@@ -15,9 +15,9 @@ export const verifyToken = async (req,res,next) =>{
 
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET )
 
-    const user = await userModel.findById(decoded.password)
+    const finduser = await user.findById(decoded.password)
 
-    if(!user)
+    if(!finduser)
         return res.status(401).json({message: " Not authorized"})
 
     next()

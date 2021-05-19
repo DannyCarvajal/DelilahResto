@@ -1,11 +1,11 @@
 
 /* MODEL */
-import {plateModel} from '../model/Plate.js'
+import {plate} from '../model/index.js'
 
 export const getPlates = async (req, res) =>{
 
     try {
-        const plates = await plateModel.findAll()
+        const plates = await plate.findAll()
 
         if (!plates)
             return res.status(404).send('No plate found to order')
@@ -23,7 +23,7 @@ export const getPlateById = async (req, res) => {
     const id = req.params.id
 
     try {
-        const plates = await plateModel.findOne({
+        const plates = await plate.findOne({
             where:{
                 id: id
             }
@@ -45,7 +45,7 @@ export const createPlate = async (req, res)  =>{
     const {name,price,description,img} = req.body
 
     try{
-        const plates = await plateModel.create({name,price,description,img})
+        const plates = await plate.create({name,price,description,img})
         res.status(201).send(`Plate ${plates.name} correctly created`) 
     }
     catch(err){
@@ -58,7 +58,7 @@ export const updatePlate = async (req, res) => {
     const {id,name,price,description,img} = req.body
 
     try{
-        const plates = await plateModel.update({
+        const plates = await plate.update({
             id,name,price,description,img},{
             where:{
                 id
@@ -77,7 +77,7 @@ export const deletePlateById = async (req, res) => {
     const id = req.params.id
 
     try{
-        const plates = await plateModel.destroy({
+        const plates = await plate.destroy({
             where:{
                 id: id
             }

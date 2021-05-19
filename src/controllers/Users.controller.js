@@ -1,13 +1,13 @@
 
 
 /* MODELS */
-import {userModel} from '../model/User.js'
+import {user} from '../model/index.js'
 
 
 export const getUsers= async (req,res)=>{
 
     try{
-        const getusers= await userModel.findAll()
+        const getusers= await user.findAll()
         res.status(200).send({data:getusers})
     }
     catch{
@@ -20,7 +20,7 @@ export const deleteUserById = async (req, res) => {
     const id = req.params.id
 
     try{
-        const deleteUser = await userModel.destroy({
+        const deleteUser = await user.destroy({
             where:{
                 id: id
             }

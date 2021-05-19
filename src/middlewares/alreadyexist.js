@@ -1,5 +1,6 @@
 
-import {userModel} from '../model/User.js'
+import {user} from '../model/index.js'
+
 
 export const userExistenceValidation = async (req,res,next) => {
 
@@ -7,14 +8,14 @@ export const userExistenceValidation = async (req,res,next) => {
     console.log(Nickname,Email)
 
     try {
-        const validateEmailExistence = await userModel.findOne({
+        const validateEmailExistence = await user.findOne({
             where:{ Email: Email}
         })
 
         if(validateEmailExistence)
             return res.send(' Email already exists')
 
-        const validateNickanmeExistence = await userModel.findOne({
+        const validateNickanmeExistence = await user.findOne({
             where:{Nickname: Nickname}
         })
 

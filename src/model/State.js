@@ -1,20 +1,21 @@
 
-import connection from '../database.js';
-
-import Sequelize from "sequelize"; // Import the built-in data types
-const {DataTypes} = Sequelize
-
-export const stateModel= connection.define('state',{
+export const stateModel=(sequelize,DataTypes) =>{
+    
+    const state = sequelize.define('state',{
 
     id:{
         type: DataTypes.INTEGER,
         primaryKey:true,
-        autoIncrement:true
+        autoIncrement:true,
+        allowNull: false
     },
     name:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull: false
     }
 },{
     timestamps:false
 })  
+    return state
 
+}

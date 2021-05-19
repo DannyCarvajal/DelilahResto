@@ -1,39 +1,43 @@
 
-import connection from '../database.js'
 
-import Sequelize from "sequelize" // Import the built-in data types
-const {DataTypes} = Sequelize 
-
-export const userModel= connection.define('user',{
-
+export const userModel= (sequelize,DataTypes) =>{
+    
+    const user = sequelize.define('user',{
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+        allowNull: false
     },
     nickname:{
         type:DataTypes.STRING,
-        unique:true
+        unique:true,
+        allowNull: false
     },
     name:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull: false
     },
     email:{
         type:DataTypes.STRING,
-        unique:true
+        unique:true,
+        allowNull: false
     },
     phonenumber:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull: false
     },
     adress:{
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     password:{
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     roleId:{
         type:DataTypes.INTEGER,
-        default: 2,
+        defaultValue: 2,
         references:{
             model: 'roles' ,
             key: 'id'
@@ -42,5 +46,6 @@ export const userModel= connection.define('user',{
 },{
     timestamps: false,
 })
-
+    return user
+}
 

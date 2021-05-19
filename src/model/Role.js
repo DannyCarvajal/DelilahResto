@@ -1,19 +1,25 @@
 
-import connection from '../database.js'
+export const roleModel= (sequelize,DataTypes) =>{
+    
+    const role = sequelize.define('role',{
+    
+        id:{
+            type: DataTypes.INTEGER,
+            primaryKey:true,
+            autoIncrement:true,
+            allowNull: false
+        },
+        name:{
+            type:DataTypes.STRING,
+            allowNull: false
+        }
+    },{
+        timestamps:false
+    })  
 
-import Sequelize from "sequelize" // Import the built-in data types
-const {DataTypes} = Sequelize
+    return role
+    
+} 
 
-export const roleModel= connection.define('role',{
 
-    id:{
-        type: DataTypes.INTEGER,
-        primaryKey:true,
-        autoIncrement:true
-    },
-    name:{
-        type:DataTypes.STRING
-    }
-},{
-    timestamps:false
-})  
+    

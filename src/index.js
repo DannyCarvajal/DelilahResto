@@ -2,14 +2,14 @@
 import express from 'express';
 const app= express()
 
+/* INIT DATABASE*/
+import connection from './model/index.js'
 
 /* IMPORTED ROUTES */
 import authRoute from './routes/auth.routes.js';
 import platesRoute from './routes/plates.routes.js';
 import userRoute from './routes/user.routes.js';
 
-/* MODEL RELATIONS */
-import * as modelrelations from './model/Relations.js'
 
 /* SETTINGS */
 app.use(express.json())
