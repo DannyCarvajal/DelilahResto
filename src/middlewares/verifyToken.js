@@ -8,18 +8,28 @@ dotenv.config()
 
 export const verifyToken = async (req,res,next) =>{
 
-    const token = req.header('auth-token')
 
-    if(!token)
-        return res.status(401).json({message: " Not token provided"})
-
-    const decoded = jwt.verify(token, process.env.TOKEN_SECRET )
-
-    const finduser = await user.findById(decoded.password)
-
-    if(!finduser)
-        return res.status(401).json({message: " Not authorized"})
-
-    next()
+    try{
+        const token = req.header('auth-token')
+    
+        if(!token)
+            return res.status(401).json({message: " Not token provided"})
+    
+        const decoded = jwt.verify(token, process.env.TOKEN_SECRET )
+        console.log(decoded)
+    
+        const finduser = await user.findOne({
+            where:{
+            password: decoded.id}
+        })
+    
+        if(!finduser)
+            return res.status(401).json({message: " Not authorized"})
+    
+        next()
+    }
+    catch(err){
+        console.log('Something happened verifying token ', err)
+    }
 
 }

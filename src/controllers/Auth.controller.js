@@ -37,13 +37,13 @@ export const userLogin = async (req,res)=>{
             return res.status(401).send('Email or password are incorrect')
 
         /* CREATE WEB TOKEN  */
-        const token= jwt.sign({ Id: Password}, process.env.TOKEN_SECRET)
+        const token= jwt.sign({ id: password}, process.env.TOKEN_SECRET)
 
         res.header('Auth-token',token).send(`User correctly logged , token: ${token}`)
         console.log(token)
         
     }
-    catch{
-        console.error('algo anda mal')
+    catch(err){
+        console.error('algo anda mal', err)
     }
 }
