@@ -1,7 +1,7 @@
 
 import connection from '../database.js'
 
-import Sequelize from "sequelize" // Import the built-in data types
+import {Sequelize} from "sequelize" // Import the built-in data types
 const {DataTypes} = Sequelize 
 
 export const userModel= connection.define('user',{
@@ -34,10 +34,6 @@ export const userModel= connection.define('user',{
     roleId:{
         type:DataTypes.INTEGER,
         default: 2,
-        // references:{
-        //     model: 'roles',
-        //     key: 'id'
-        // }
     }
 },{
     timestamps: false,

@@ -8,7 +8,6 @@ import authRoute from './routes/auth.routes.js';
 import platesRoute from './routes/plates.routes.js';
 import userRoute from './routes/user.routes.js';
 
-
 /* SETTINGS */
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
