@@ -1,12 +1,17 @@
 
-export const adminrole = (req,res,next) => {
+/* BEFORE CHECKING THE ADMINROLE WE GOTTA CHECK THE AUTH-TOKEN */
+export const adminrole = async  (req,res,next) => {
 
-    const {Role_Id} = req.body
+    try{
+        console.log('lo logramos papa',req.userData)
+        console.log('the roleid is ' , req.userData.roleId)
+        
+        if(req.userData.roleId !== 1)
+            return res.status(401).send({message: 'Admin permission denied'})
 
-    console.log(Role_Id)
-
-    if (!Role_Id || Role_id === 2)
-        return res.status(401).send('You are not an administrator')
-
-    next()
+        next()
+    }
+    catch(err){
+        console.log('admin error ', err)
+    }
 }

@@ -12,7 +12,7 @@ import { userModel } from './User.js'
 import { stateModel } from './State.js'
 import { orderModel } from './Order.js'
 import { plateModel } from './Plate.js'
-import { orderplateModel } from './Order_Plate.js'
+import { orderplateModel } from './orderPlate.js'
 
 
 const role = roleModel(connection, DataTypes)

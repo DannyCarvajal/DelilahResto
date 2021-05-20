@@ -4,7 +4,7 @@ const router = Router()
 
 /* VALIDATIONS */
 import {userDataValidation} from '../middlewares/dataValid.js'
-import {userExistenceValidation} from '../middlewares/alreadyexist.js'
+import {userExistenceValidation} from '../middlewares/alreadyExist.js'
 
 /* CONTROLLER */
 import * as authController from '../controllers/Auth.controller.js'

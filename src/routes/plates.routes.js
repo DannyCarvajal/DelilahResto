@@ -4,6 +4,7 @@ const router = Router()
 
 /* VALIDATION */
 import {verifyToken} from '../middlewares/verifyToken.js'
+import {adminrole} from '../middlewares/adminValid.js'
 
 /* CONTROLLERS */
 import * as plateController from '../controllers/Plates.controller.js'
@@ -19,13 +20,13 @@ router.get('/', plateController.getPlates )
 router.get('/:id', plateController.getPlateById )
 
 /* POST A NEW PLATE */
-router.post('/',plateController.createPlate)
+router.post('/',adminrole,plateController.createPlate)
 
 /* UPDATE A PLATE */
-router.put('/',plateController.updatePlate)
+router.put('/',adminrole,plateController.updatePlate)
 
 /* DELETE A PLATE */
-router.delete('/:id', plateController.deletePlateById)
+router.delete('/:id',adminrole, plateController.deletePlateById)
 
 
 export default router

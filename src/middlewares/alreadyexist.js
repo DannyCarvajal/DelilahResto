@@ -4,19 +4,19 @@ import {user} from '../model/index.js'
 
 export const userExistenceValidation = async (req,res,next) => {
 
-    const {Nickname,Email} = req.body
-    console.log(Nickname,Email)
+    const {nickname,email} = req.body
+    console.log(nickname,email)
 
     try {
         const validateEmailExistence = await user.findOne({
-            where:{ Email: Email}
+            where:{ email: email}
         })
 
         if(validateEmailExistence)
             return res.send(' Email already exists')
 
         const validateNickanmeExistence = await user.findOne({
-            where:{Nickname: Nickname}
+            where:{nickname: nickname}
         })
 
         if( validateNickanmeExistence)

@@ -14,7 +14,7 @@ export const orderModel= (sequelize,DataTypes) =>{
         allowNull: false
     },
     payMethod:{
-        type:DataTypes.INTEGER,
+        type:DataTypes.STRING,
         allowNull: false
     },
     userId:{
