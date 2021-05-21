@@ -1,5 +1,5 @@
 
-import {user} from '../model/index.js'
+import {user} from '../model/dbInitialize.js'
 
 
 export const userExistenceValidation = async (req,res,next) => {

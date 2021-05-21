@@ -14,7 +14,7 @@ export const orderModel= (sequelize,DataTypes) =>{
         allowNull: false
     },
     payMethod:{
-        type:DataTypes.STRING,
+        type:DataTypes.ENUM('Credit card','Debit card','Paypal'),
         allowNull: false
     },
     userId:{
@@ -28,6 +28,7 @@ export const orderModel= (sequelize,DataTypes) =>{
     stateId:{
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 1,
         references:{
             model:'states',
             key: 'id'

@@ -1,6 +1,6 @@
 
 import jwt from 'jsonwebtoken'
-import {user} from '../model/index.js'
+import {user} from '../model/dbInitialize.js'
 
 /* ENVIROMENT VARIABLES */
 import dotenv from 'dotenv'
@@ -22,7 +22,7 @@ export const verifyToken = async (req,res,next) =>{
     
         const finduser = await user.findOne({
             where:{
-            password: decoded.id}
+            id: decoded.id}
         })
 
         if(!finduser)
@@ -37,6 +37,8 @@ export const verifyToken = async (req,res,next) =>{
     }
     catch(err){
         console.log('Something happened verifying token ', err)
+        return res.status(401).json({message: " Invalid Token"})
+
     }
 
 }

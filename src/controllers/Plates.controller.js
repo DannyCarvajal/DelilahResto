@@ -1,6 +1,6 @@
 
 /* MODEL */
-import {plate} from '../model/index.js'
+import {plate} from '../model/dbInitialize.js'
 
 export const getPlates = async (req, res) =>{
 

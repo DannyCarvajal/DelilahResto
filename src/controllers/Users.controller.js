@@ -1,7 +1,7 @@
 
 
 /* MODELS */
-import {user} from '../model/index.js'
+import {user} from '../model/dbInitialize.js'
 
 
 export const getUsers= async (req,res)=>{

@@ -1,6 +1,6 @@
 
 /* DATABASE MODELS */
-import {user} from '../model/index.js'
+import {user} from '../model/dbInitialize.js'
 
 /* JSON TOKENS */
 import jwt from 'jsonwebtoken'
@@ -33,11 +33,13 @@ export const userLogin = async (req,res)=>{
             where:{email:email,password: password }
         })
 
+        const userId= verifyuser.dataValues.id
+
         if (!verifyuser)
             return res.status(401).send('Email or password are incorrect')
 
         /* CREATE WEB TOKEN  */
-        const token= jwt.sign({ id: password}, process.env.TOKEN_SECRET)
+        const token= jwt.sign({ id: userId}, process.env.TOKEN_SECRET)
 
         res.header('Auth-token',token).send(`User correctly logged , token: ${token}`)
         console.log(token)
