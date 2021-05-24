@@ -8,7 +8,6 @@ dotenv.config()
 
 export const verifyToken = async (req,res,next) =>{
 
-
     try{
         /* TOKEN EXISTENCE */
         const token = req.header('auth-token')
@@ -18,7 +17,6 @@ export const verifyToken = async (req,res,next) =>{
     
         /* TOKEN VALIDATION */
         const decoded = jwt.verify(token, process.env.TOKEN_SECRET )
-        console.log(decoded)
     
         const finduser = await user.findOne({
             where:{
@@ -30,14 +28,13 @@ export const verifyToken = async (req,res,next) =>{
 
         /* DATA OF THE TOKEN PROVIDED */
         let userData = finduser.dataValues
-        console.log(userData)
         req.userData= userData
     
         next()
     }
     catch(err){
         console.log('Something happened verifying token ', err)
-        return res.status(401).json({message: " Invalid Token"})
+        return res.status(401).json({message: "Error in token validation"})
 
     }
 

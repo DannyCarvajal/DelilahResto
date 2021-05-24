@@ -15,11 +15,11 @@ export const registerUser = async (req,res)=>{
 
     try{
         const newuser= await user.create({nickname,name,email,phonenumber,adress,password})
-        res.status(201).send(`User ${newuser.nickname} correctly created`) 
+        res.status(201).json({message:`User ${newuser.nickname} correctly created`}) 
 
     }
     catch(err){
-        res.status(400).send('User could not be created ')
+        res.status(400).json({message:'User could not be created '})
     }
 }
 
@@ -33,19 +33,19 @@ export const userLogin = async (req,res)=>{
             where:{email:email,password: password }
         })
 
-        const userId= verifyuser.dataValues.id
-
         if (!verifyuser)
-            return res.status(401).send('Email or password are incorrect')
+            res.status(400).json({message:`Email or password are incorrect`}) 
+
+
+        const userId= verifyuser.dataValues.id
 
         /* CREATE WEB TOKEN  */
         const token= jwt.sign({ id: userId}, process.env.TOKEN_SECRET)
 
-        res.header('Auth-token',token).send(`User correctly logged , token: ${token}`)
-        console.log(token)
-        
+        res.status(200).header('Auth-token',token).json({message: `User correctly logged , token: ${token}`})
     }
     catch(err){
-        console.error('algo anda mal', err)
+        console.error('Error login user ', err)
+        res.status(400).json({message:'User could not be Logged '})
     }
 }

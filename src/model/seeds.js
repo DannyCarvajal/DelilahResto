@@ -1,5 +1,5 @@
 
-import {role, user,plate, state } from './dbInitialize.js'
+import {role, user,plate, state, order, orderplate } from './dbInitialize.js'
 
 export const defaultDbValues = async () => {
 
@@ -16,7 +16,7 @@ export const defaultDbValues = async () => {
         return
     }
     
-    const defaultRoles = ['Admin', 'User']
+    const defaultRoles =[ ['Admin'],[ 'User']]
 
     const defaultUser = [
         ['hellenflash', 'Hellen Nicolle', 'mycycle@hotmail.com', '15648948', 'Bogota las Américas piso2 apt 301', 'melo123'],
@@ -36,9 +36,19 @@ export const defaultDbValues = async () => {
         ['Pendiente'],[ 'Enviado'],[ 'Cancelado'],[ 'Recibido']
     ]
 
+    const defaultOrders= [
+        [115, 'Paypal', 1],
+        [560, 'Paypal', 2]
+    ]
+
+    const defaultOrderPlates = [
+        [1, 1, 3], [1 ,2, 4],
+        [2, 3, 1], [2, 5, 12]
+    ]
+
     // /* INITIAL VALUES */
     defaultRoles.forEach(element => {
-        role.create({ name: element })
+        role.create({ name: element[0] })
     })
 
     defaultUser.forEach(element => {
@@ -58,4 +68,37 @@ export const defaultDbValues = async () => {
         state.create({name:element[0]})
     })
 
+    defaultOrders.forEach(element =>{
+        order.create({
+            total: element[0], payMethod: element[1], userId: element[2]
+        })
+    })
+
+    defaultOrderPlates.forEach(element =>{
+        orderplate.create({
+            orderId: element[0], plateId: element[1], quantity: element[2]
+        })
+    })
 }
+
+
+    // const insertDefaultValues = async (arrayName, model, values) => {
+
+    //     let createValues;
+
+    //     // for await (let [value,index] of values.entries()) {
+    //     //     createValues+= `${value[index]} : element[${index}], `
+    //     // }
+
+    //     values.forEach(async (element,index) => {
+    //         createValues += `${element} : element[${index}], `
+    //     })
+
+    //     // arrayName.forEach( () => {
+    //     //     model.create({
+    //     //         eval(createValues)
+    //     //     })
+    //     // })
+
+    //     return createValues
+    // }

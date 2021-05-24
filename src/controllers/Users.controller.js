@@ -8,10 +8,11 @@ export const getUsers= async (req,res)=>{
 
     try{
         const getusers= await user.findAll()
-        res.status(200).send({data:getusers})
+        res.status(200).send({message:getusers})
     }
-    catch{
-        res.status(400).send('Problem getting users information')
+    catch(err){
+        console.log('Error getting users', err)
+        res.status(400).json({message:'Problem getting users information'})
     }
 }
 
@@ -25,9 +26,14 @@ export const deleteUserById = async (req, res) => {
                 id: id
             }
         })
-        res.status(201).send(`User ${id} correctly deleted`) 
+
+        if(!deleteUser)
+            return res.status(404).json({message: 'User wasn´t found'})
+
+        res.status(201).json({message: `User ${id} correctly deleted`}) 
     }
     catch(err){
-        res.status(400).send('Something went wrong' , err)
+        console.log('Error deleting user', err)
+        res.status(400).json({message:'Error deleting user account'})
     }
 }

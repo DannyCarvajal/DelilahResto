@@ -4,16 +4,72 @@ import connection from '../database.js'
 import {Sequelize} from 'sequelize'
 const {QueryTypes} = Sequelize
 
-import { order, orderplate, plate } from '../model/dbInitialize.js'
+import { user,order, orderplate, plate } from '../model/dbInitialize.js'
 
 
 export const getOrders = async (req, res) => {
 
+    try{
+        const orderList = await order.findAll()
+        let messageSend = []
 
 
+        for await (const element of orderList) {
 
+            let fullOrderList = {}
+
+            /* ORDER ID */
+            fullOrderList.orderId = element.dataValues.id
+            
+            /* USER DATA  */
+            const clientId= element.dataValues.userId
+            const clientSearch = await user.findAll({
+                where:{
+                    id:clientId
+                }
+            })
+            const clientData= clientSearch[0].dataValues
+
+            /* APPEND USER DATA TO THE OBJECT */
+            fullOrderList.username = clientData.name
+            fullOrderList.phonenumber = clientData.phonenumber
+            fullOrderList.adress = clientData.adress
+            
+            /* APPEND ORDER DATA TO THE OBJECY */
+            fullOrderList.total = element.dataValues.total
+            fullOrderList.payMethod = element.dataValues.payMethod
+            
+            let orderplateSearch = await orderplate.findAll({
+                where:{
+                    orderId: element.dataValues.id
+                }
+            })
+
+            /* APPEND EACH PLATE TO THE OBJECT*/
+            if(orderplateSearch){
+                let plates =[]
+                orderplateSearch.forEach( async (element) => {
+                    let plate = {}
+                    plate.plateId = element.dataValues.plateId
+                    plate.quantity = element.dataValues.quantity
+                    plates.push(plate)
+                })
+                fullOrderList.plates= plates
+            }
+
+            fullOrderList.stateId = element.dataValues.stateId
+            messageSend.push(fullOrderList)
+        }
+
+        res.status(200).json({message : messageSend})
+
+    }
+    catch(err){
+        res.status(200).json({message:' Couldnt get any order'})
+    }
 
 }
+
 
 export const getOrderById = async (req, res) => {
 
@@ -30,10 +86,6 @@ export const createOrder = async (req, res) => {
     let total = 0
 
     try {
-        /* GET THE LAST ID  */
-        const [lastIdQuery] = await connection.query('SELECT max(id) FROM orders ',{type: QueryTypes.SELECT})
-        const lastId = Object.values(lastIdQuery)[0]
-
         /* GET PLATE VALUES AND TOTAL*/
         for await (const element of plates) {
 
@@ -44,7 +96,7 @@ export const createOrder = async (req, res) => {
             })
 
             if (!foundPlate)
-                return res.status(404).json({ "message": `Plate ${element.id} not found` })
+                return res.status(404).json({ message: `Plate ${element.id} not found` })
 
             const platePrice = foundPlate.dataValues.price
             const finalPriceByPlate = platePrice * element.quantity
@@ -58,11 +110,15 @@ export const createOrder = async (req, res) => {
             total, payMethod, userId: userData.id
         })
 
+        /* GET THE LAST ID  */
+        const [lastIdQuery] = await connection.query('SELECT max(id) FROM orders ',{type: QueryTypes.SELECT})
+        const lastId = Object.values(lastIdQuery)[0]
+
         /*  CREATE ORDERPLATE MODEL  */
         for await (const element of plates) {
 
             await orderplate.create({
-                orderId:  lastId + 1,
+                orderId:  lastId,
                 plateId: element.id,
                 quantity: element.quantity
             })

@@ -30,12 +30,13 @@ export const getPlateById = async (req, res) => {
         })
 
         if (!plates)
-            return res.status(404).send(`No plate found with the id ${id}`)
+            return res.status(404).json({message: `No plate found with the id ${id}` })
 
-        res.status(201).send({ data: plates })
+        res.status(201).json({ message: plates })
     }
     catch (err) {
-        res.status(400).send('Something went wrong')
+        console.log('error getting plate', err)
+        res.status(400).json({message:'Something went wrong getting the plates'})
     }
 
 }
@@ -46,10 +47,11 @@ export const createPlate = async (req, res)  =>{
 
     try{
         const plates = await plate.create({name,price,description,img})
-        res.status(201).send(`Plate ${plates.name} correctly created`) 
+        res.status(201).json({message:`Plate ${plates.name} correctly created`}) 
     }
     catch(err){
-        res.status(400).send('Something went wrong' , err)
+        console.log('error creating plate', err)
+        res.status(400).json({message:`Plate couldnt be created`})
     }
 }
 
@@ -65,10 +67,14 @@ export const updatePlate = async (req, res) => {
             }
         })
 
-        res.status(201).send(`Plate ${id} correctly updated`) 
+        if(!plates)
+            return res.status(404).send(`No plate found with the id ${id}`)
+
+        res.status(201).json({message:`Plate ${id} correctly updated`}) 
     }
     catch(err){
-        res.status(400).send('Something went wrong' , err)
+        console.log('error updating plate', err)
+        res.status(400).json({message:`Plate ${id} couldnt be updated`})
     }
 }
 
@@ -82,9 +88,15 @@ export const deletePlateById = async (req, res) => {
                 id: id
             }
         })
-        res.status(201).send(`Plate ${id} correctly deleted`) 
+
+        if(!plates)
+            return res.status(404).send(`No plate found with the id ${id}`)
+
+        res.status(201).json({message:`Plate ${id} correctly deleted`})  
     }
     catch(err){
-        res.status(400).send('Something went wrong' , err)
+        console.log('error deleting plate', err)
+        res.status(400).json({message:`Plate ${id} couldnt be deleted`})
+
     }
 }

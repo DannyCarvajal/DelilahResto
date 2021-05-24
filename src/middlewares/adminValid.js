@@ -3,9 +3,6 @@
 export const adminrole = async  (req,res,next) => {
 
     try{
-        console.log('lo logramos papa',req.userData)
-        console.log('the roleid is ' , req.userData.roleId)
-        
         if(req.userData.roleId !== 1)
             return res.status(401).send({message: 'Admin permission denied'})
 
@@ -13,5 +10,6 @@ export const adminrole = async  (req,res,next) => {
     }
     catch(err){
         console.log('admin error ', err)
+        return res.status(401).send({message: 'error due to Admin permission'})
     }
 }

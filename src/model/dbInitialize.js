@@ -27,6 +27,7 @@ const orderplate = orderplateModel(connection, DataTypes)
 
 
 /* --------- DB SYNC AND INITIAL DATA--------------- */
+// export default connection.sync({force:true})
 export default connection.sync()
     .then(() => defaultDbValues())
     .catch((err) => console.log(err))
