@@ -42,7 +42,7 @@ export const userLogin = async (req,res)=>{
         /* CREATE WEB TOKEN  */
         const token= jwt.sign({ id: userId}, process.env.TOKEN_SECRET)
 
-        res.status(200).header('Auth-token',token).json({message: `User correctly logged , token: ${token}`})
+        res.status(200).header('Auth-token',token).json({message: `User correctly logged `, token:` ${token}`})
     }
     catch(err){
         console.error('Error login user ', err)

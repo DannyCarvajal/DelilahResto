@@ -10,7 +10,7 @@ export const stateModel=(sequelize,DataTypes) =>{
         allowNull: false
     },
     name:{
-        type:DataTypes.ENUM('Pendiente', 'Enviado', 'Cancelado', 'Recibido'),
+        type:DataTypes.ENUM('Pending','Sent','Cancelled','Received'),
         allowNull: false
     }
 },{

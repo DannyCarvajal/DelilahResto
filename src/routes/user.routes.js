@@ -14,6 +14,9 @@ router.use(verifyToken,adminrole)
 /* GET ALL THE USERS */
 router.get('/', userController.getUsers )
 
+/* GET ALL THE USERS */
+router.get('/:id', userController.getUserById )
+
 /* DELETE USER BY ID */
 router.delete('/:id', userController.deleteUserById )
 

@@ -33,7 +33,7 @@ export const defaultDbValues = async () => {
     ]
 
     const defaultState= [
-        ['Pendiente'],[ 'Enviado'],[ 'Cancelado'],[ 'Recibido']
+        ['Pending'],['Sent'],['Cancelled'],['Received']
     ]
 
     const defaultOrders= [

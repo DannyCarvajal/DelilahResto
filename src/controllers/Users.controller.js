@@ -16,6 +16,24 @@ export const getUsers= async (req,res)=>{
     }
 }
 
+export const getUserById= async (req,res)=>{
+
+    const id = req.params.id
+
+    try{
+        const getusers= await user.findOne({
+            where:{
+                id
+            }
+        })
+        res.status(200).send({message:getusers})
+    }
+    catch(err){
+        console.log('Error getting user', err)
+        res.status(400).json({message:'Problem getting user information'})
+    }
+}
+
 export const deleteUserById = async (req, res) => {
 
     const id = req.params.id

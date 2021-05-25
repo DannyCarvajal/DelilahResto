@@ -57,24 +57,25 @@ export const createPlate = async (req, res)  =>{
 
 export const updatePlate = async (req, res) => {
 
-    const {id,name,price,description,img} = req.body
+    const plateId = req.params.id
+    const {name,price,description,img} = req.body
 
     try{
         const plates = await plate.update({
-            id,name,price,description,img},{
+            name,price,description,img},{
             where:{
-                id
+                id: plateId
             }
         })
 
         if(!plates)
-            return res.status(404).send(`No plate found with the id ${id}`)
+            return res.status(404).send(`No plate found with the id ${plateId}`)
 
-        res.status(201).json({message:`Plate ${id} correctly updated`}) 
+        res.status(201).json({message:`Plate ${plateId} correctly updated`}) 
     }
     catch(err){
         console.log('error updating plate', err)
-        res.status(400).json({message:`Plate ${id} couldnt be updated`})
+        res.status(400).json({message:`Plate ${plateId} couldnt be updated`})
     }
 }
 

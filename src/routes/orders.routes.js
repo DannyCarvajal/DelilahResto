@@ -24,7 +24,7 @@ router.get('/:id', adminrole , orderController.getOrderById )
 router.post('/',  orderController.createOrder)
 
 /* UPDATE AN ORDER  */
-router.put('/',adminrole,orderController.updateOrder)
+router.put('/:id',adminrole,orderController.updateOrder)
 
 /* DELETE AN ORDER  */
 router.delete('/:id',adminrole, orderController.deleteOrderById)

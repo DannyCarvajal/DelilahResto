@@ -23,7 +23,7 @@ router.get('/:id', plateController.getPlateById )
 router.post('/',adminrole,plateController.createPlate)
 
 /* UPDATE A PLATE */
-router.put('/',adminrole,plateController.updatePlate)
+router.put('/:id',adminrole,plateController.updatePlate)
 
 /* DELETE A PLATE */
 router.delete('/:id',adminrole, plateController.deletePlateById)
