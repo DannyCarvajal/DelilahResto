@@ -19,7 +19,7 @@ export const defaultDbValues = async () => {
     const defaultRoles =[ ['Admin'],[ 'User']]
 
     const defaultUser = [
-        ['hellenflash', 'Hellen Nicolle', 'mycycle@hotmail.com', '15648948', 'Bogota las Américas piso2 apt 301', 'melo123'],
+        ['hellenflash', 'Hellen Nicolle', 'hellen@hotmail.com', '15648948', 'Bogota las Américas piso2 apt 301', 'melo123'],
         ['tsweetheart', 'daniel carvajal', 'daniel@hotmail.com', '5464564', 'Bucaramanga Santander Holliday inn apt 503', 'sara12', 1]
     ]
 

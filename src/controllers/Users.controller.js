@@ -3,7 +3,6 @@
 /* MODELS */
 import {user} from '../model/dbInitialize.js'
 
-
 export const getUsers= async (req,res)=>{
 
     try{
@@ -33,6 +32,21 @@ export const getUserById= async (req,res)=>{
         res.status(400).json({message:'Problem getting user information'})
     }
 }
+
+export const createUser = async (req, res)  =>{
+
+    const {nickname,name,email,phonenumber,adress,password} = req.body
+
+    try{
+        const newuser= await user.create({nickname,name,email,phonenumber,adress,password, roleId: 1})
+        res.status(201).json({message:`User ${newuser.nickname} with admin permission correctly created`}) 
+    }
+    catch(err){
+        console.log('error creating plate', err)
+        res.status(400).json({message:`User couldnt be created`})
+    }
+}
+
 
 export const deleteUserById = async (req, res) => {
 

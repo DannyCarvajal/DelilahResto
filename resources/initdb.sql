@@ -38,7 +38,7 @@ CREATE TABLE `USERS` (
 
 
 INSERT INTO users(nickname,name,email,phonenumber,adress,password,roleId) VALUES
-    ('hellenbab', 'Hellen Nicolle', 'mycycle@hotmail.com','15648948','Bogota las Américas piso2 apt 301', 'melo123',2),
+    ('hellenbab', 'Hellen Nicolle', 'hellen@hotmail.com','15648948','Bogota las Américas piso2 apt 301', 'melo123',2),
     ('tsweetheart','daniel carvajal', 'daniel@hotmail.com','5464564','Bucaramanga Santander Holliday inn apt 503', 'sara12', 1);
 
 

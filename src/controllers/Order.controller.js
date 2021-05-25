@@ -207,6 +207,14 @@ export const deleteOrderById = async (req, res) => {
 
     try{
 
+        const orderSearch = await order.findOne({ where: { id: orderId}})
+
+        if(!orderSearch)
+            return res.status(404).json({ message: `Order ${orderId} does not exist` })
+        
+
+        await orderplate.destroy({  where:{orderId} })
+
         await order.destroy({
             where:{
                 id: orderId

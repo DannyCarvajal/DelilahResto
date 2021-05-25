@@ -11,7 +11,7 @@ import * as authController from '../controllers/Auth.controller.js'
 
 
 /* REGISTER */
-router.post('/register',userExistenceValidation, userDataValidation , authController.registerUser)
+router.post('/register',userExistenceValidation, userDataValidation, authController.registerUser)
 
 /* LOGIN */
 router.post('/login', authController.userLogin)
