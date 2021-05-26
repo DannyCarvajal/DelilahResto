@@ -24,7 +24,7 @@ export const userDataValidation = [
     ,
 
     check('password', 'Password must be +4 chars and contain a number')
-    .isLength({min:4,max:12})
+    .isLength({min:4,max:25})
     .not()
     .isEmpty()
     .matches(/\d/)

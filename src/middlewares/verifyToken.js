@@ -34,7 +34,7 @@ export const verifyToken = async (req,res,next) =>{
     }
     catch(err){
         console.log('Something happened verifying token ', err)
-        return res.status(401).json({message: "Error in token validation"})
+        return res.status(500).json({message: "Error in token validation"})
 
     }
 

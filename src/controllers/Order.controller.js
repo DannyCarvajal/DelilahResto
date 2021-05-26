@@ -22,7 +22,7 @@ export const getOrders = async (req, res) => {
 
     }
     catch(err){
-        res.status(200).json({message:' Couldnt get any order'})
+        res.status(500).json({message:' Couldnt get any order'})
     }
 
 }

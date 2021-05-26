@@ -1,7 +1,7 @@
 
 import {role, user,plate, state, order, orderplate } from './dbInitialize.js'
 
-export const defaultDbValues = async () => {
+( async () => {
 
 
     /* IF USER ROLE EXITS IT MEANS THIS INITIAL DATA WAS ALREADY CREATED */
@@ -79,26 +79,4 @@ export const defaultDbValues = async () => {
             orderId: element[0], plateId: element[1], quantity: element[2]
         })
     })
-}
-
-
-    // const insertDefaultValues = async (arrayName, model, values) => {
-
-    //     let createValues;
-
-    //     // for await (let [value,index] of values.entries()) {
-    //     //     createValues+= `${value[index]} : element[${index}], `
-    //     // }
-
-    //     values.forEach(async (element,index) => {
-    //         createValues += `${element} : element[${index}], `
-    //     })
-
-    //     // arrayName.forEach( () => {
-    //     //     model.create({
-    //     //         eval(createValues)
-    //     //     })
-    //     // })
-
-    //     return createValues
-    // }
+} ) ()

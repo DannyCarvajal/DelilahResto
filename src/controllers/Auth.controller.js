@@ -19,7 +19,7 @@ export const registerUser = async (req,res)=>{
 
     }
     catch(err){
-        res.status(400).json({message:'User could not be created '})
+        res.status(500).json({message:'User could not be created '})
     }
 }
 
@@ -46,6 +46,6 @@ export const userLogin = async (req,res)=>{
     }
     catch(err){
         console.error('Error login user ', err)
-        res.status(400).json({message:'User could not be Logged '})
+        res.status(500).json({message:'User could not be Logged '})
     }
 }

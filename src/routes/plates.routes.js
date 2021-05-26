@@ -11,6 +11,7 @@ import * as plateController from '../controllers/Plates.controller.js'
 
 
 router.use(verifyToken)
+
 /* PLATES */
 
 /* GET THE PLATES AVAILABLE */
