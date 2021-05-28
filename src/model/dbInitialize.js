@@ -26,3 +26,6 @@ export default connection.sync()
 
 export { role, user, state, plate, order, orderplate }
 
+
+
+

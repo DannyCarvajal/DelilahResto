@@ -11,6 +11,9 @@ const port= process.env.PORT
 
 /* INIT DATABASE*/
 import connection from './model/dbInitialize.js'
+/* INITIAL DATA */
+import {defaultValues} from './model/seeds.js'
+defaultValues()
 
 /* IMPORTED ROUTES */
 import authRoute from './routes/auth.routes.js'

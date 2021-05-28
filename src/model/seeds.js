@@ -1,7 +1,7 @@
 
 import {role, user,plate, state, order, orderplate } from './dbInitialize.js'
 
-( async () => {
+export const defaultValues = async () => {
 
 
     /* IF USER ROLE EXITS IT MEANS THIS INITIAL DATA WAS ALREADY CREATED */
@@ -79,4 +79,4 @@ import {role, user,plate, state, order, orderplate } from './dbInitialize.js'
             orderId: element[0], plateId: element[1], quantity: element[2]
         })
     })
-} ) ()
+} 
