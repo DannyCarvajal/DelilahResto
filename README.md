@@ -1,4 +1,4 @@
-# Delilah Restó
+# Deliláh Resto
 
 
 >Every journey start with a small or big step, and for me this has been one of the main approaches to the back-end world 
