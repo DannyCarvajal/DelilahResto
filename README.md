@@ -10,9 +10,9 @@ Delilah Restó is a REST API for a restaurant business 🥘 in which the clients
 ### Technologies
 
 The project was built using :
-- **Npm **v. 7.12.1
-- ** Node** v. 16.1.0 (ES6 modules)
-- ** MYSQL server** 8.0
+- **Npm** v. 7.12.1
+- **Node** v. 16.1.0 (ES6 modules)
+- **MYSQL server** 8.0
 
 ### Dependences
 
