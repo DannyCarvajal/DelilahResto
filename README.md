@@ -36,7 +36,7 @@ npm i dotenv express express-validator jsonwebtoken mysql2 sequelize
 Develop dependence (recommended)
 
 ```shell
-npm init nodemon --save-dev
+npm i nodemon --save-dev
 ```
 
 
