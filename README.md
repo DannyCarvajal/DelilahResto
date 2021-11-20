@@ -28,7 +28,7 @@ The project was built using :
 
 ##    1  ---  S    T    E     P
 
-**Clone the project**, **open the master branch** and** install the required dependences** with the following code 
+**Clone the project**, **open the master branch** and ** install the required dependences** with the following code 
 
 ```shell
 npm i dotenv express express-validator jsonwebtoken mysql2 sequelize
